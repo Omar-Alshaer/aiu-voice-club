@@ -386,33 +386,34 @@
 
                     <div class="registration-form">
                         <h4 style="color: white; margin-bottom: 1.5rem;">نموذج التسجيل</h4>
-                        <form id="movieForm">
+                        <form action="https://formspree.io/f/mnnzvyqn" method="POST" id="movieForm">
+                            <input type="hidden" name="event_type" value="Movie Day">
                             <div class="form-group">
-                                <label for="name1">الاسم الكامل</label>
-                                <input type="text" id="name1" name="name" placeholder="أدخل اسمك الكامل" required>
+                                <label for="name1">Full Name</label>
+                                <input type="text" id="name1" name="name" placeholder="Enter your full name" required>
                             </div>
                             <div class="form-group">
-                                <label for="email1">البريد الإلكتروني</label>
+                                <label for="email1">Email Address</label>
                                 <input type="email" id="email1" name="email" placeholder="example@aiu.edu.eg" required>
                             </div>
                             <div class="form-group">
-                                <label for="phone1">رقم الهاتف</label>
+                                <label for="phone1">Phone Number</label>
                                 <input type="tel" id="phone1" name="phone" placeholder="+20 123 456 789" required>
                             </div>
                             <div class="form-group">
-                                <label for="college1">الكلية</label>
+                                <label for="college1">College</label>
                                 <select id="college1" name="college" required>
-                                    <option value="">اختر الكلية</option>
-                                    <option value="engineering">كلية الهندسة</option>
-                                    <option value="business">كلية إدارة الأعمال</option>
-                                    <option value="arts">كلية الآداب</option>
-                                    <option value="science">كلية العلوم</option>
-                                    <option value="medicine">كلية الطب</option>
+                                    <option value="">Select College</option>
+                                    <option value="engineering">Engineering</option>
+                                    <option value="business">Business Administration</option>
+                                    <option value="arts">Arts</option>
+                                    <option value="science">Science</option>
+                                    <option value="medicine">Medicine</option>
                                 </select>
                             </div>
-                            <button type="submit" class="submit-btn">سجل في يوم السينما</button>
+                            <button type="submit" class="submit-btn">Register for Movie Day</button>
                             <div class="success-message" id="success1">
-                                تم التسجيل بنجاح! سيتم التواصل معك قريباً.
+                                Registration successful! We'll contact you soon.
                             </div>
                         </form>
                     </div>
@@ -454,31 +455,32 @@
 
                     <div class="registration-form">
                         <h4 style="color: white; margin-bottom: 1.5rem;">نموذج التسجيل</h4>
-                        <form id="breakfastForm">
+                        <form action="https://formspree.io/f/mnnzvyqn" method="POST" id="breakfastForm">
+                            <input type="hidden" name="event_type" value="Community Breakfast">
                             <div class="form-group">
-                                <label for="name2">الاسم الكامل</label>
-                                <input type="text" id="name2" name="name" placeholder="أدخل اسمك الكامل" required>
+                                <label for="name2">Full Name</label>
+                                <input type="text" id="name2" name="name" placeholder="Enter your full name" required>
                             </div>
                             <div class="form-group">
-                                <label for="email2">البريد الإلكتروني</label>
+                                <label for="email2">Email Address</label>
                                 <input type="email" id="email2" name="email" placeholder="example@aiu.edu.eg" required>
                             </div>
                             <div class="form-group">
-                                <label for="phone2">رقم الهاتف</label>
+                                <label for="phone2">Phone Number</label>
                                 <input type="tel" id="phone2" name="phone" placeholder="+20 123 456 789" required>
                             </div>
                             <div class="form-group">
-                                <label for="dietary">التفضيلات الغذائية</label>
+                                <label for="dietary">Dietary Preferences</label>
                                 <select id="dietary" name="dietary">
-                                    <option value="none">لا توجد قيود</option>
-                                    <option value="vegetarian">نباتي</option>
-                                    <option value="vegan">نباتي صرف</option>
-                                    <option value="gluten-free">خالي من الجلوتين</option>
+                                    <option value="none">No restrictions</option>
+                                    <option value="vegetarian">Vegetarian</option>
+                                    <option value="vegan">Vegan</option>
+                                    <option value="gluten-free">Gluten-free</option>
                                 </select>
                             </div>
-                            <button type="submit" class="submit-btn">سجل في الإفطار الجماعي</button>
+                            <button type="submit" class="submit-btn">Register for Community Breakfast</button>
                             <div class="success-message" id="success2">
-                                تم التسجيل بنجاح! سيتم التواصل معك قريباً.
+                                Registration successful! We'll contact you soon.
                             </div>
                         </form>
                     </div>
@@ -520,31 +522,32 @@
 
                     <div class="registration-form">
                         <h4 style="color: white; margin-bottom: 1.5rem;">طلب المشاركة</h4>
-                        <form id="podcastForm">
+                        <form action="https://formspree.io/f/mnnzvyqn" method="POST" id="podcastForm">
+                            <input type="hidden" name="event_type" value="Podcast Participation">
                             <div class="form-group">
-                                <label for="name3">الاسم الكامل</label>
-                                <input type="text" id="name3" name="name" placeholder="أدخل اسمك الكامل" required>
+                                <label for="name3">Full Name</label>
+                                <input type="text" id="name3" name="name" placeholder="Enter your full name" required>
                             </div>
                             <div class="form-group">
-                                <label for="email3">البريد الإلكتروني</label>
+                                <label for="email3">Email Address</label>
                                 <input type="email" id="email3" name="email" placeholder="example@aiu.edu.eg" required>
                             </div>
                             <div class="form-group">
-                                <label for="participation">نوع المشاركة</label>
+                                <label for="participation">Participation Type</label>
                                 <select id="participation" name="participation" required>
-                                    <option value="">اختر نوع المشاركة</option>
-                                    <option value="guest">ضيف في الحلقة</option>
-                                    <option value="host">مقدم برنامج</option>
-                                    <option value="listener">مستمع فقط</option>
+                                    <option value="">Select participation type</option>
+                                    <option value="guest">Episode Guest</option>
+                                    <option value="host">Program Host</option>
+                                    <option value="listener">Listener Only</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="topic">الموضوع المقترح</label>
-                                <textarea id="topic" name="topic" rows="3" placeholder="اقترح موضوعاً للنقاش أو اكتب عن خبرتك"></textarea>
+                                <label for="topic">Suggested Topic</label>
+                                <textarea id="topic" name="topic" rows="3" placeholder="Suggest a discussion topic or write about your experience"></textarea>
                             </div>
-                            <button type="submit" class="submit-btn">أرسل طلب المشاركة</button>
+                            <button type="submit" class="submit-btn">Submit Participation Request</button>
                             <div class="success-message" id="success3">
-                                تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.
+                                Request sent successfully! We'll contact you soon.
                             </div>
                         </form>
                     </div>

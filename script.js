@@ -774,25 +774,73 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Form submissions for all pages
+    // Form submissions for all pages with Formspree integration
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const formType = form.className;
-            let message = 'Form submitted successfully!';
+            const formData = new FormData(form);
+            const action = form.getAttribute('action');
 
-            if (formType.includes('article-form')) {
-                message = 'Article submitted for review! 📝';
-            } else if (formType.includes('artwork-form')) {
-                message = 'Artwork submitted successfully! 🎨';
-            } else if (formType.includes('member-nomination-form')) {
-                message = 'Nomination submitted! Thank you for recognizing excellence! ⭐';
+            // Only handle Formspree forms
+            if (action && action.includes('formspree.io')) {
+                try {
+                    const response = await fetch(action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        let message = 'Form submitted successfully! ✅';
+
+                        const formType = form.className || form.id;
+                        if (formType.includes('article-form') || formType.includes('newsletter')) {
+                            message = 'Thank you! Your submission has been received! 📝';
+                        } else if (formType.includes('artwork-form')) {
+                            message = 'Artwork submitted successfully! 🎨';
+                        } else if (formType.includes('member-nomination-form')) {
+                            message = 'Nomination submitted! Thank you for recognizing excellence! ⭐';
+                        } else if (formType.includes('Form')) {
+                            message = 'Registration successful! We\'ll contact you soon! 🎉';
+                        }
+
+                        showNotification(message, 'success', 4000);
+                        form.reset();
+
+                        // Show success message if it exists
+                        const successMsg = form.querySelector('.success-message');
+                        if (successMsg) {
+                            successMsg.style.display = 'block';
+                            setTimeout(() => {
+                                successMsg.style.display = 'none';
+                            }, 5000);
+                        }
+                    } else {
+                        throw new Error('Network response was not ok');
+                    }
+                } catch (error) {
+                    showNotification('There was a problem submitting your form. Please try again.', 'error', 4000);
+                }
+            } else {
+                // Handle non-Formspree forms (local forms)
+                const formType = form.className || form.id;
+                let message = 'Form submitted successfully!';
+
+                if (formType.includes('article-form')) {
+                    message = 'Article submitted for review! 📝';
+                } else if (formType.includes('artwork-form')) {
+                    message = 'Artwork submitted successfully! 🎨';
+                } else if (formType.includes('member-nomination-form')) {
+                    message = 'Nomination submitted! Thank you for recognizing excellence! ⭐';
+                }
+
+                showNotification(message, 'success', 4000);
+                form.reset();
             }
-
-            showNotification(message, 'success', 4000);
-            form.reset();
         });
     });
 
