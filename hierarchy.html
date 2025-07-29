@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - AIU Voice Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .hierarchy-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hierarchy-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .org-chart {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .president-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .president-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 3rem;
+            max-width: 500px;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .president-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1.5rem;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .member-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-position {
+            font-size: 1.2rem;
+            color: #feca57;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .member-description {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .department-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .department-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .department-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .department-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .department-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .team-members {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .member-mini-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .member-info h4 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .member-role {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .responsibilities {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .responsibilities h4 {
+            color: #feca57;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .responsibilities ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .responsibilities li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+            padding-right: 1rem;
+            position: relative;
+        }
+
+        .responsibilities li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: #feca57;
+            font-weight: bold;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .connection-lines {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .connection-line {
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, #feca57, transparent);
+        }
+
+        @media (max-width: 768px) {
+            .hierarchy-title {
+                font-size: 2.5rem;
+            }
+
+            .departments-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .department-card {
+                padding: 2rem;
+            }
+
+            .president-card {
+                margin: 0 2rem;
+                padding: 2rem;
+            }
+
+            .member-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+
+            .back-button {
+                top: 80px;
+                left: 20px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="img/vice.logo.png" alt="AIU Voice Club Logo" class="logo">
+                <span class="nav-title">AIU Voice Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="activities.html" class="nav-link">Activities</a></li>
+                <li><a href="newspaper.html" class="nav-link">Newspaper</a></li>
+                <li><a href="events.html" class="nav-link">Events</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+                <li><a href="star-members.html" class="nav-link">Star Members</a></li>
+                <li><a href="hierarchy.html" class="nav-link">Our Team</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="window.history.back()">
+        ← Back
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hierarchy-hero">
+        <div class="floating-elements">
+            <img src="img/Char/char3.png" alt="Character" class="floating-char" style="top: 20%; left: 10%; width: 80px;">
+            <img src="img/Char/char7.png" alt="Character" class="floating-char" style="top: 60%; right: 10%; width: 80px;">
+        </div>
+        <h1 class="hierarchy-title">Our Team Structure</h1>
+    </section>
+
+    <!-- Organization Chart -->
+    <section class="org-chart">
+        <div class="container">
+            <!-- President Section -->
+            <div class="president-section">
+                <div class="president-card">
+                    <div class="member-avatar">👑</div>
+                    <h2 class="member-name">أحمد محمد علي</h2>
+                    <p class="member-position">رئيس النادي</p>
+                    <p class="member-description">
+                        يقود النادي بحكمة وإبداع، ويشرف على جميع الأنشطة والفعاليات. 
+                        يتمتع بخبرة واسعة في إدارة الفرق وتنظيم الفعاليات الطلابية.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Connection Line -->
+            <div class="connection-lines">
+                <div class="connection-line"></div>
+            </div>
+
+            <!-- Departments Grid -->
+            <div class="departments-grid">
+                <!-- Media Department -->
+                <div class="department-card">
+                    <div class="department-header">
+                        <div class="department-icon">📱</div>
+                        <h3 class="department-title">قسم الإعلام والتسويق</h3>
+                    </div>
+                    
+                    <div class="team-members">
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👩‍💻</div>
+                            <div class="member-info">
+                                <h4>سارة أحمد</h4>
+                                <p class="member-role">مدير القسم</p>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👨‍🎨</div>
+                            <div class="member-info">
+                                <h4>محمد حسن</h4>
+                                <p class="member-role">مصمم جرافيك</p>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👩‍📱</div>
+                            <div class="member-info">
+                                <h4>نور علي</h4>
+                                <p class="member-role">مسؤول وسائل التواصل</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="responsibilities">
+                        <h4>المسؤوليات:</h4>
+                        <ul>
+                            <li>إدارة حسابات وسائل التواصل الاجتماعي</li>
+                            <li>تصميم المواد الإعلانية والترويجية</li>
+                            <li>تغطية الفعاليات والأنشطة</li>
+                            <li>إنتاج المحتوى المرئي والمكتوب</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Events Department -->
+                <div class="department-card">
+                    <div class="department-header">
+                        <div class="department-icon">🎉</div>
+                        <h3 class="department-title">قسم الفعاليات والأنشطة</h3>
+                    </div>
+                    
+                    <div class="team-members">
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👨‍🎪</div>
+                            <div class="member-info">
+                                <h4>عمر محمود</h4>
+                                <p class="member-role">مدير القسم</p>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👩‍🎭</div>
+                            <div class="member-info">
+                                <h4>فاطمة سالم</h4>
+                                <p class="member-role">منسق الفعاليات</p>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👨‍🎵</div>
+                            <div class="member-info">
+                                <h4>يوسف أحمد</h4>
+                                <p class="member-role">مسؤول الأنشطة الفنية</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="responsibilities">
+                        <h4>المسؤوليات:</h4>
+                        <ul>
+                            <li>تخطيط وتنظيم الفعاليات</li>
+                            <li>إدارة الأنشطة الترفيهية والثقافية</li>
+                            <li>تنسيق المشاركات الخارجية</li>
+                            <li>متابعة تنفيذ البرامج</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Technical Department -->
+                <div class="department-card">
+                    <div class="department-header">
+                        <div class="department-icon">💻</div>
+                        <h3 class="department-title">القسم التقني</h3>
+                    </div>
+                    
+                    <div class="team-members">
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👨‍💻</div>
+                            <div class="member-info">
+                                <h4>كريم عبدالله</h4>
+                                <p class="member-role">مدير القسم</p>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👩‍💻</div>
+                            <div class="member-info">
+                                <h4>مريم حسام</h4>
+                                <p class="member-role">مطور ويب</p>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👨‍🔧</div>
+                            <div class="member-info">
+                                <h4>أحمد طارق</h4>
+                                <p class="member-role">مسؤول الدعم التقني</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="responsibilities">
+                        <h4>المسؤوليات:</h4>
+                        <ul>
+                            <li>تطوير وصيانة الموقع الإلكتروني</li>
+                            <li>إدارة الأنظمة التقنية</li>
+                            <li>الدعم التقني للفعاليات</li>
+                            <li>تطوير التطبيقات والأدوات</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Relations Department -->
+                <div class="department-card">
+                    <div class="department-header">
+                        <div class="department-icon">🤝</div>
+                        <h3 class="department-title">قسم العلاقات العامة</h3>
+                    </div>
+                    
+                    <div class="team-members">
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👩‍💼</div>
+                            <div class="member-info">
+                                <h4>ليلى محمد</h4>
+                                <p class="member-role">مدير القسم</p>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👨‍💼</div>
+                            <div class="member-info">
+                                <h4>حسام علي</h4>
+                                <p class="member-role">منسق الشراكات</p>
+                            </div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-mini-avatar">👩‍🎓</div>
+                            <div class="member-info">
+                                <h4>دينا سمير</h4>
+                                <p class="member-role">مسؤول التواصل الطلابي</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="responsibilities">
+                        <h4>المسؤوليات:</h4>
+                        <ul>
+                            <li>بناء العلاقات مع الجهات الخارجية</li>
+                            <li>تنسيق الشراكات والرعايات</li>
+                            <li>التواصل مع الطلاب والأساتذة</li>
+                            <li>إدارة العلاقات الإعلامية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About AIU Voice Club Section -->
+    <section class="about-club">
+        <div class="container">
+            <h2 class="section-title">About AIU Voice Club</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>AIU Voice Club is the heartbeat of student life at Alamein International University. Founded in 2020, we are a vibrant community of creative minds, passionate leaders, and innovative thinkers who believe in the power of student voice and collaboration.</p>
+                    <div class="about-highlights">
+                        <div class="highlight">
+                            <span class="highlight-number">500+</span>
+                            <span class="highlight-label">Active Members</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="highlight-number">50+</span>
+                            <span class="highlight-label">Events Hosted</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="highlight-number">4</span>
+                            <span class="highlight-label">Years Strong</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="img/vice.logo.png" alt="AIU Voice Club Logo" class="footer-logo">
+                    <h3>AIU Voice Club</h3>
+                    <p>Alamein International University's Premier Student Organization</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" title="Instagram">📷</a>
+                        <a href="#" class="social-icon" title="Facebook">📘</a>
+                        <a href="#" class="social-icon" title="Anghami">🎵</a>
+                        <a href="#" class="social-icon" title="YouTube">📺</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="newspaper.html">Newspaper</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>More Pages</h4>
+                    <ul>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="achievements.html">Achievements</a></li>
+                        <li><a href="star-members.html">Star Members</a></li>
+                        <li><a href="hierarchy.html">Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>📧 voice@aiu.edu.eg</p>
+                    <p>📱 +20 123 456 789</p>
+                    <p>📍 Alamein International University</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AIU Voice Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration - AIU Voice Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .events-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .events-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .events-container {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .event-detail-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-detail-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .event-icon-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .event-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-status {
+            background: linear-gradient(45deg, #00d4aa, #00b894);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .event-details {
+            margin-bottom: 2rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .detail-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .event-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .registration-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #feca57;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .qr-section {
+            text-align: center;
+            margin: 4rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .qr-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .qr-codes-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .qr-code-item {
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .qr-code:hover {
+            transform: scale(1.05);
+        }
+
+        .qr-label {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .qr-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .success-message {
+            background: linear-gradient(45deg, #00d4aa, #00b894);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .events-title {
+                font-size: 2.5rem;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .event-detail-card {
+                padding: 2rem;
+            }
+
+            .event-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .qr-codes-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .back-button {
+                top: 80px;
+                left: 20px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="img/vice.logo.png" alt="AIU Voice Club Logo" class="logo">
+                <span class="nav-title">AIU Voice Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="activities.html" class="nav-link">Activities</a></li>
+                <li><a href="newspaper.html" class="nav-link">Newspaper</a></li>
+                <li><a href="events.html" class="nav-link">Events</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+                <li><a href="star-members.html" class="nav-link">Star Members</a></li>
+                <li><a href="hierarchy.html" class="nav-link">Our Team</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="window.history.back()">
+        ← العودة
+    </button>
+
+    <!-- Hero Section -->
+    <section class="events-hero">
+        <div class="floating-elements">
+            <img src="img/Char/char4.png" alt="Character" class="floating-char" style="top: 20%; left: 10%; width: 80px;">
+            <img src="img/Char/char8.png" alt="Character" class="floating-char" style="top: 60%; right: 10%; width: 80px;">
+        </div>
+        <h1 class="events-title">تسجيل الفعاليات</h1>
+    </section>
+
+    <!-- Events Container -->
+    <section class="events-container">
+        <div class="container">
+            <!-- Events Grid -->
+            <div class="events-grid">
+                <!-- Movie Day Event -->
+                <div class="event-detail-card" id="movie-day">
+                    <div class="event-header">
+                        <div class="event-icon-large">🎬</div>
+                        <div class="event-info">
+                            <h3>يوم السينما</h3>
+                            <span class="event-status">متاح للتسجيل</span>
+                        </div>
+                    </div>
+
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <span>20 مارس 2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🕕</div>
+                            <span>6:00 مساءً - 9:00 مساءً</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📍</div>
+                            <span>قاعة المؤتمرات الكبرى</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">👥</div>
+                            <span>100 مقعد متاح</span>
+                        </div>
+                    </div>
+
+                    <p class="event-description">
+                        أمسية سينمائية مميزة تتضمن عرض مجموعة من الأفلام التعليمية والترفيهية، 
+                        مع جلسة نقاش تفاعلية حول المحتوى المعروض. سيتم تقديم وجبات خفيفة ومشروبات.
+                    </p>
+
+                    <div class="registration-form">
+                        <h4 style="color: white; margin-bottom: 1.5rem;">نموذج التسجيل</h4>
+                        <form id="movieForm">
+                            <div class="form-group">
+                                <label for="name1">الاسم الكامل</label>
+                                <input type="text" id="name1" name="name" placeholder="أدخل اسمك الكامل" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email1">البريد الإلكتروني</label>
+                                <input type="email" id="email1" name="email" placeholder="example@aiu.edu.eg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone1">رقم الهاتف</label>
+                                <input type="tel" id="phone1" name="phone" placeholder="+20 123 456 789" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="college1">الكلية</label>
+                                <select id="college1" name="college" required>
+                                    <option value="">اختر الكلية</option>
+                                    <option value="engineering">كلية الهندسة</option>
+                                    <option value="business">كلية إدارة الأعمال</option>
+                                    <option value="arts">كلية الآداب</option>
+                                    <option value="science">كلية العلوم</option>
+                                    <option value="medicine">كلية الطب</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="submit-btn">سجل في يوم السينما</button>
+                            <div class="success-message" id="success1">
+                                تم التسجيل بنجاح! سيتم التواصل معك قريباً.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Breakfast Event -->
+                <div class="event-detail-card" id="breakfast">
+                    <div class="event-header">
+                        <div class="event-icon-large">🍽️</div>
+                        <div class="event-info">
+                            <h3>الإفطار الجماعي</h3>
+                            <span class="event-status">متاح للتسجيل</span>
+                        </div>
+                    </div>
+
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <span>25 مارس 2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🕘</div>
+                            <span>9:00 صباحاً - 11:00 صباحاً</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📍</div>
+                            <span>حديقة الجامعة</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">👥</div>
+                            <span>150 مقعد متاح</span>
+                        </div>
+                    </div>
+
+                    <p class="event-description">
+                        لقاء اجتماعي مميز يجمع الطلاب والأساتذة في أجواء ودية، 
+                        مع إفطار شامل وأنشطة ترفيهية متنوعة. فرصة رائعة للتعارف وبناء علاقات جديدة.
+                    </p>
+
+                    <div class="registration-form">
+                        <h4 style="color: white; margin-bottom: 1.5rem;">نموذج التسجيل</h4>
+                        <form id="breakfastForm">
+                            <div class="form-group">
+                                <label for="name2">الاسم الكامل</label>
+                                <input type="text" id="name2" name="name" placeholder="أدخل اسمك الكامل" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email2">البريد الإلكتروني</label>
+                                <input type="email" id="email2" name="email" placeholder="example@aiu.edu.eg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone2">رقم الهاتف</label>
+                                <input type="tel" id="phone2" name="phone" placeholder="+20 123 456 789" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dietary">التفضيلات الغذائية</label>
+                                <select id="dietary" name="dietary">
+                                    <option value="none">لا توجد قيود</option>
+                                    <option value="vegetarian">نباتي</option>
+                                    <option value="vegan">نباتي صرف</option>
+                                    <option value="gluten-free">خالي من الجلوتين</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="submit-btn">سجل في الإفطار الجماعي</button>
+                            <div class="success-message" id="success2">
+                                تم التسجيل بنجاح! سيتم التواصل معك قريباً.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Podcast Event -->
+                <div class="event-detail-card" id="podcast">
+                    <div class="event-header">
+                        <div class="event-icon-large">🎙️</div>
+                        <div class="event-info">
+                            <h3>البودكاست الطلابي</h3>
+                            <span class="event-status">مستمر</span>
+                        </div>
+                    </div>
+
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <span>كل يوم أربعاء</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🕖</div>
+                            <span>7:00 مساءً - 8:00 مساءً</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📍</div>
+                            <span>استوديو الإذاعة</span>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🎧</div>
+                            <span>بث مباشر</span>
+                        </div>
+                    </div>
+
+                    <p class="event-description">
+                        برنامج إذاعي أسبوعي يناقش مواضيع متنوعة تهم الطلاب، 
+                        مع استضافة شخصيات مؤثرة وخبراء في مختلف المجالات. يمكن المشاركة كضيف أو مستمع.
+                    </p>
+
+                    <div class="registration-form">
+                        <h4 style="color: white; margin-bottom: 1.5rem;">طلب المشاركة</h4>
+                        <form id="podcastForm">
+                            <div class="form-group">
+                                <label for="name3">الاسم الكامل</label>
+                                <input type="text" id="name3" name="name" placeholder="أدخل اسمك الكامل" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email3">البريد الإلكتروني</label>
+                                <input type="email" id="email3" name="email" placeholder="example@aiu.edu.eg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="participation">نوع المشاركة</label>
+                                <select id="participation" name="participation" required>
+                                    <option value="">اختر نوع المشاركة</option>
+                                    <option value="guest">ضيف في الحلقة</option>
+                                    <option value="host">مقدم برنامج</option>
+                                    <option value="listener">مستمع فقط</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="topic">الموضوع المقترح</label>
+                                <textarea id="topic" name="topic" rows="3" placeholder="اقترح موضوعاً للنقاش أو اكتب عن خبرتك"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">أرسل طلب المشاركة</button>
+                            <div class="success-message" id="success3">
+                                تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Codes Section -->
+            <div class="qr-section">
+                <h2 class="qr-title">روابط سريعة</h2>
+                <div class="qr-codes-container">
+                    <div class="qr-code-item">
+                        <div class="qr-code">📱</div>
+                        <div class="qr-label">نموذج التسجيل العام</div>
+                        <div class="qr-description">امسح للوصول السريع</div>
+                    </div>
+                    <div class="qr-code-item">
+                        <div class="qr-code">🎧</div>
+                        <div class="qr-label">استمع للبودكاست</div>
+                        <div class="qr-description">الحلقات السابقة</div>
+                    </div>
+                    <div class="qr-code-item">
+                        <div class="qr-code">📞</div>
+                        <div class="qr-label">تواصل معنا</div>
+                        <div class="qr-description">للاستفسارات</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="img/vice.logo.png" alt="AIU Voice Club Logo" class="footer-logo">
+                    <h3>AIU Voice Club</h3>
+                    <p>نادي صوت جامعة العلمين الدولية</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="best-member.html">أفضل عضو</a></li>
+                        <li><a href="hierarchy.html">الهيكل التنظيمي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <p>📧 voice@aiu.edu.eg</p>
+                    <p>📱 +20 123 456 789</p>
+                    <p>📍 جامعة العلمين الدولية</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AIU Voice Club. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Form submission handling
+        document.getElementById('movieForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('success1').style.display = 'block';
+            this.reset();
+        });
+
+        document.getElementById('breakfastForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('success2').style.display = 'block';
+            this.reset();
+        });
+
+        document.getElementById('podcastForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('success3').style.display = 'block';
+            this.reset();
+        });
+
+        // URL parameter handling for direct event access
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventType = urlParams.get('event');
+        
+        if (eventType) {
+            const targetElement = document.getElementById(eventType);
+            if (targetElement) {
+                setTimeout(() => {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    targetElement.style.border = '2px solid #feca57';
+                    setTimeout(() => {
+                        targetElement.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+                    }, 3000);
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>

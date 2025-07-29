@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Members - AIU Voice Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .best-member-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-spotlight {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 2rem;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .member-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .member-title {
+            font-size: 1.3rem;
+            color: #feca57;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .member-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .member-achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-badge:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .member-quote {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            position: relative;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .member-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.3);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+        }
+
+        .member-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #feca57;
+            display: block;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-star {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.5rem;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .star1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .star2 { top: 30%; right: 15%; animation-delay: 0.5s; }
+        .star3 { top: 60%; left: 5%; animation-delay: 1s; }
+        .star4 { top: 70%; right: 10%; animation-delay: 1.5s; }
+        .star5 { top: 40%; right: 5%; animation-delay: 2s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .member-spotlight {
+                margin: 2rem;
+                padding: 2rem;
+            }
+
+            .member-photo {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+
+            .member-name {
+                font-size: 2rem;
+            }
+
+            .member-title {
+                font-size: 1.1rem;
+            }
+
+            .back-button {
+                top: 80px;
+                left: 20px;
+                padding: 10px 20px;
+            }
+
+            .member-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .member-achievements {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="img/vice.logo.png" alt="AIU Voice Club Logo" class="logo">
+                <span class="nav-title">AIU Voice Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="hierarchy.html" class="nav-link">Our Team</a></li>
+                <li><a href="events.html" class="nav-link">Events</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="window.history.back()">
+        ← Back
+    </button>
+
+    <!-- Best Member Hero Section -->
+    <section class="best-member-hero">
+        <div class="floating-elements">
+            <div class="floating-star star1">⭐</div>
+            <div class="floating-star star2">✨</div>
+            <div class="floating-star star3">🌟</div>
+            <div class="floating-star star4">⭐</div>
+            <div class="floating-star star5">✨</div>
+            <img src="img/Char/char2.png" alt="Character" class="floating-char" style="top: 10%; left: 5%; width: 100px;">
+            <img src="img/Char/char5.png" alt="Character" class="floating-char" style="top: 70%; right: 5%; width: 100px;">
+        </div>
+
+        <div class="member-spotlight">
+            <div class="member-photo">
+                👨‍🎓
+            </div>
+            
+            <h1 class="member-name">Ahmed Mohamed Ali</h1>
+            <p class="member-title">President of AIU Voice Club</p>
+
+            <p class="member-description">
+                An outstanding Engineering student with exceptional leadership qualities and unlimited enthusiasm for developing student activities.
+                He successfully led the club to achieve remarkable accomplishments and organize innovative events that attracted hundreds of students to active participation.
+            </p>
+
+            <div class="member-stats">
+                <div class="stat-item">
+                    <span class="stat-number">25</span>
+                    <span class="stat-label">فعالية منظمة</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">طالب مشارك</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">سنوات خبرة</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">جائزة حصل عليها</span>
+                </div>
+            </div>
+
+            <div class="member-quote">
+                "النجاح الحقيقي يكمن في قدرتنا على إلهام الآخرين وخلق بيئة إيجابية تساعد كل طالب على اكتشاف مواهبه وتطوير قدراته. 
+                نادي AIU Voice ليس مجرد مكان للأنشطة، بل هو بيت ثانٍ لكل طالب يسعى للتميز والإبداع."
+            </div>
+
+            <div class="member-achievements">
+                <div class="achievement-badge">
+                    <div class="badge-icon">🏆</div>
+                    <div class="badge-text">أفضل رئيس نادي</div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">🎯</div>
+                    <div class="badge-text">قائد مبدع</div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">🌟</div>
+                    <div class="badge-text">ملهم الطلاب</div>
+                </div>
+                <div class="achievement-badge">
+                    <div class="badge-icon">🤝</div>
+                    <div class="badge-text">روح الفريق</div>
+                </div>
+            </div>
+
+            <div class="member-social">
+                <a href="#" class="social-link" title="LinkedIn">💼</a>
+                <a href="#" class="social-link" title="Instagram">📷</a>
+                <a href="#" class="social-link" title="Twitter">🐦</a>
+                <a href="#" class="social-link" title="Email">📧</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Information Section -->
+    <section class="section" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); padding: 80px 0;">
+        <div class="container">
+            <h2 class="section-title">مسيرة التميز</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; border: 1px solid rgba(255,255,255,0.2);">
+                    <h3 style="color: #feca57; margin-bottom: 1rem; font-size: 1.5rem;">🎓 التعليم</h3>
+                    <p style="color: rgba(255,255,255,0.9); line-height: 1.6;">
+                        طالب في السنة الرابعة بكلية الهندسة، تخصص هندسة الحاسوب. 
+                        معدل تراكمي ممتاز 3.8/4.0. حاصل على منحة التفوق الأكاديمي لثلاث سنوات متتالية.
+                    </p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; border: 1px solid rgba(255,255,255,0.2);">
+                    <h3 style="color: #feca57; margin-bottom: 1rem; font-size: 1.5rem;">🏆 الإنجازات</h3>
+                    <ul style="color: rgba(255,255,255,0.9); line-height: 1.8;">
+                        <li>المركز الأول في مسابقة الابتكار الطلابي 2023</li>
+                        <li>جائزة أفضل مشروع تخرج 2024</li>
+                        <li>شهادة تقدير من إدارة الجامعة</li>
+                        <li>قائد فريق البرمجة الفائز</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; border: 1px solid rgba(255,255,255,0.2);">
+                    <h3 style="color: #feca57; margin-bottom: 1rem; font-size: 1.5rem;">🎯 الأهداف المستقبلية</h3>
+                    <p style="color: rgba(255,255,255,0.9); line-height: 1.6;">
+                        يسعى لإكمال الدراسات العليا في مجال الذكاء الاصطناعي، 
+                        وتأسيس شركة تقنية تساهم في تطوير التعليم الرقمي في المنطقة العربية.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="img/vice.logo.png" alt="AIU Voice Club Logo" class="footer-logo">
+                    <h3>AIU Voice Club</h3>
+                    <p>نادي صوت جامعة العلمين الدولية</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="hierarchy.html">الهيكل التنظيمي</a></li>
+                        <li><a href="events.html">الفعاليات</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <p>📧 voice@aiu.edu.eg</p>
+                    <p>📱 +20 123 456 789</p>
+                    <p>📍 جامعة العلمين الدولية</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AIU Voice Club. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
